@@ -4,9 +4,10 @@ const path = require("path");
 const napp = require("nappjs")();
 
 describe("database", () => {
-  before(() => {
+  before(async () => {
     napp.addPlugin("core-data", path.join(__dirname, "../index.js"));
-    return napp.load();
+    await napp.load();
+    await napp.start();
   });
 
   after(() => {
