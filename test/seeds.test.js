@@ -3,7 +3,7 @@ const path = require("path");
 const moment = require("moment");
 
 process.env.SCRIPTS_PATH = path.join(__dirname, "../scripts");
-const napp = require("nappjs")();
+const napp = require("nappjs").NewNappJS();
 
 describe("seeds", () => {
   before(() => {

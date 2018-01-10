@@ -1,7 +1,7 @@
 const assert = require("assert");
 const path = require("path");
 
-const napp = require("nappjs")();
+const napp = require("nappjs").NewNappJS();
 
 describe("database", () => {
   before(async () => {
