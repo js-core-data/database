@@ -48,6 +48,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var nappjs_1 = require("nappjs");
 var fs = require("fs");
 var path = require("path");
+var assert = require("assert");
 var seedPath = path.resolve(process.env.SEEDS_PATH || "./seeds");
 var NappJSCoreDataSeedScript = (function (_super) {
     __extends(NappJSCoreDataSeedScript, _super);
@@ -57,6 +58,7 @@ var NappJSCoreDataSeedScript = (function (_super) {
     NappJSCoreDataSeedScript.prototype.start = function (napp, seed) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
+                assert.ok(seed, "seed name must be provided as first argument");
                 return [2, napp.locals.database.seed.run(path.join(seedPath, seed))];
             });
         });
