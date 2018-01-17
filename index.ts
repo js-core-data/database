@@ -28,7 +28,6 @@ export default class NappJSCoreData extends NappJSService {
     );
     return this.database.schema.load(schemaPath);
   }
-
   public async syncSchema(options) {
     await this.loadSchema();
     await this.database.syncSchema(options);
@@ -36,6 +35,10 @@ export default class NappJSCoreData extends NappJSService {
 
   public createContext() {
     return this.database.createContext();
+  }
+
+  async load(napp: NappJS) {
+    return this.loadSchema();
   }
 
   async start(napp: NappJS) {

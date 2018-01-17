@@ -6,7 +6,7 @@ const napp = require("nappjs").NewNappJS();
 describe("database", () => {
   before(async () => {
     napp.addPlugin("nappjs-core-data", path.join(__dirname, "../index.js"));
-    await napp.start();
+    await napp.load();
   });
 
   after(() => {
