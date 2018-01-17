@@ -14,7 +14,7 @@
     "sqlite3": "^3.1.13"
   },
   "peerDependencies": {
-    "nappjs": "^0.5.3"
+    "nappjs": "^0.5.4"
   },
   "scripts": {
     "patch-release": "npm version patch && npm publish && git push --follow-tags",
@@ -24,6 +24,6 @@
     "@types/node": "^9.3.0",
     "mocha": "^4.0.1",
     "moment": "^2.20.1",
-    "nappjs": "^0.5.3"
+    "nappjs": "^0.5.4"
   }
 }

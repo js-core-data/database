@@ -91,6 +91,13 @@ var NappJSCoreData = (function (_super) {
     NappJSCoreData.prototype.createContext = function () {
         return this.database.createContext();
     };
+    NappJSCoreData.prototype.load = function (napp) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2, this.loadSchema()];
+            });
+        });
+    };
     NappJSCoreData.prototype.start = function (napp) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
