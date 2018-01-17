@@ -54,41 +54,71 @@ var DATABASE_DEBUG = !!process.env.DATABASE_DEBUG;
 var NappJSCoreData = (function (_super) {
     __extends(NappJSCoreData, _super);
     function NappJSCoreData() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super.call(this) || this;
+        _this.schemaLoaded = false;
+        var database = new CoreData(DATABASE_URL, { logging: DATABASE_DEBUG });
+        _this.database = database;
+        return _this;
     }
-    NappJSCoreData.prototype.register = function (napp) {
+    NappJSCoreData.prototype.loadSchema = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var database, schemaPath;
+            var schemaPath;
+            return __generator(this, function (_a) {
+                if (this.schemaLoaded) {
+                    return [2];
+                }
+                this.schemaLoaded = true;
+                schemaPath = path.resolve(process.env.DATABASE_SCHEMA_PATH || "./schema/");
+                return [2, this.database.schema.load(schemaPath)];
+            });
+        });
+    };
+    NappJSCoreData.prototype.syncSchema = function (options) {
+        return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0:
-                        database = new CoreData(DATABASE_URL, { logging: DATABASE_DEBUG });
-                        schemaPath = path.resolve(process.env.DATABASE_SCHEMA_PATH || "./schema/");
-                        return [4, database.schema.load(schemaPath)];
+                    case 0: return [4, this.loadSchema()];
                     case 1:
                         _a.sent();
-                        napp.locals.database = database;
+                        return [4, this.database.syncSchema(options)];
+                    case 2:
+                        _a.sent();
                         return [2];
                 }
             });
         });
     };
+    NappJSCoreData.prototype.createContext = function () {
+        return this.database.createContext();
+    };
     NappJSCoreData.prototype.start = function (napp) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                assert.ok(napp.locals.database, "database not loaded");
-                if (process.env.NODE_ENV !== "production") {
-                    console.log("migrating/syncing database (NODE_ENV: !production)");
-                    return [2, napp.locals.database.syncSchema({
-                            automigration: true,
-                            ignoreMissingVersion: true
-                        })];
+                switch (_a.label) {
+                    case 0: return [4, this.loadSchema()];
+                    case 1:
+                        _a.sent();
+                        assert.ok(this.database, "database not loaded");
+                        if (process.env.NODE_ENV !== "production") {
+                            console.log("migrating/syncing database (NODE_ENV: !production)");
+                            return [2, this.database.syncSchema({
+                                    automigration: true,
+                                    ignoreMissingVersion: true
+                                })];
+                        }
+                        return [2];
                 }
-                return [2];
+            });
+        });
+    };
+    NappJSCoreData.prototype.stop = function (napp) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2, this.database.closeAllConnections()];
             });
         });
     };
     return NappJSCoreData;
-}(nappjs_1.NappJSModule));
+}(nappjs_1.NappJSService));
 exports.default = NappJSCoreData;
 //# sourceMappingURL=index.js.map

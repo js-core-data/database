@@ -7,15 +7,17 @@ const napp = require("nappjs").NewNappJS();
 
 describe("migations", () => {
   before(() => {
-    napp.addPlugin("core-data", path.join(__dirname, "../index.js"));
+    napp.addPlugin("nappjs-core-data", path.join(__dirname, "../index.js"));
     return napp.load();
   });
 
   beforeEach(() => {
-    return napp.locals.database.syncSchema({ force: true });
+    let coredata = napp.getService("nappjs-core-data");
+    return coredata.syncSchema({ force: true });
   });
   after(() => {
-    return napp.locals.database.closeAllConnections();
+    let coredata = napp.getService("nappjs-core-data");
+    return coredata.stop();
   });
 
   it("should run script migrate", async () => {

@@ -1,4 +1,4 @@
-import { NappJS, NappJSModule } from 'nappjs';
-export default class NappJSCoreDataMigrateScript extends NappJSModule {
-    start(napp: NappJS): Promise<any>;
+import { NappJS, NappJSScript } from 'nappjs';
+export default class NappJSCoreDataMigrateScript extends NappJSScript {
+    run(napp: NappJS): Promise<any>;
 }

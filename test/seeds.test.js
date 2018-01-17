@@ -7,24 +7,26 @@ const napp = require("nappjs").NewNappJS();
 
 describe("seeds", () => {
   before(() => {
-    napp.addPlugin("core-data", path.join(__dirname, "../index.js"));
+    napp.addPlugin("nappjs-core-data", path.join(__dirname, "../index.js"));
     return napp.load();
   });
 
   beforeEach(() => {
-    return napp.locals.database.syncSchema({ force: true });
+    let coredata = napp.getService("nappjs-core-data");
+    return coredata.syncSchema({ force: true });
   });
   after(() => {
-    return napp.locals.database.closeAllConnections();
+    let coredata = napp.getService("nappjs-core-data");
+    return coredata.stop();
   });
 
   it("should run test seed", async () => {
     await napp.runScript("seed", "test");
-    // await app.seeds.run(app.database, "test");
 
-    const context = napp.locals.database.createContext();
+    const context = napp.getService("nappjs-core-data").createContext();
 
     let people = await context.getObjects("Person");
+
     assert.equal(people.length, 2);
 
     let chuck = await context.getObjectWithId("Person", 999);

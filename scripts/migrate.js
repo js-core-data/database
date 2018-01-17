@@ -54,10 +54,12 @@ var NappJSCoreDataMigrateScript = (function (_super) {
     function NappJSCoreDataMigrateScript() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    NappJSCoreDataMigrateScript.prototype.start = function (napp) {
+    NappJSCoreDataMigrateScript.prototype.run = function (napp) {
         return __awaiter(this, void 0, void 0, function () {
+            var coredata;
             return __generator(this, function (_a) {
-                return [2, napp.locals.database.syncSchema({
+                coredata = napp.getService("nappjs-core-data");
+                return [2, coredata.database.syncSchema({
                         automigration: true,
                         ignoreMissingVersion: true
                     })];
@@ -65,6 +67,6 @@ var NappJSCoreDataMigrateScript = (function (_super) {
         });
     };
     return NappJSCoreDataMigrateScript;
-}(nappjs_1.NappJSModule));
+}(nappjs_1.NappJSScript));
 exports.default = NappJSCoreDataMigrateScript;
 //# sourceMappingURL=migrate.js.map

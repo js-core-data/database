@@ -55,15 +55,17 @@ var NappJSCoreDataSeedScript = (function (_super) {
     function NappJSCoreDataSeedScript() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    NappJSCoreDataSeedScript.prototype.start = function (napp, seed) {
+    NappJSCoreDataSeedScript.prototype.run = function (napp, seed) {
         return __awaiter(this, void 0, void 0, function () {
+            var coredata;
             return __generator(this, function (_a) {
                 assert.ok(seed, "seed name must be provided as first argument");
-                return [2, napp.locals.database.seed.run(path.join(seedPath, seed))];
+                coredata = napp.getService("nappjs-core-data");
+                return [2, coredata.database.seed.run(path.join(seedPath, seed))];
             });
         });
     };
     return NappJSCoreDataSeedScript;
-}(nappjs_1.NappJSModule));
+}(nappjs_1.NappJSScript));
 exports.default = NappJSCoreDataSeedScript;
 //# sourceMappingURL=seed.js.map
