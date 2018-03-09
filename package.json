@@ -1,7 +1,7 @@
 {
   "name": "nappjs-core-data",
   "description": "js-core-data plugin for nappjs",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "license": "MIT",
   "repository": {
     "type": "git",
