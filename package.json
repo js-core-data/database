@@ -8,7 +8,7 @@
     "url": "https://github.com/nappjs/nappjs-core-data.git"
   },
   "dependencies": {
-    "js-core-data": "^1.9.0",
+    "js-core-data": "^1.9.1",
     "mysql": "^2.15.0",
     "pg": "^7.4.0",
     "sqlite3": "^3.1.13"
