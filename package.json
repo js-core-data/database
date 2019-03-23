@@ -10,8 +10,7 @@
   "dependencies": {
     "js-core-data": "^1.9.1",
     "mysql": "^2.15.0",
-    "pg": "^7.4.0",
-    "sqlite3": "^3.1.13"
+    "pg": "^7.4.0"
   },
   "peerDependencies": {
     "nappjs": "^0.5.4"
@@ -24,6 +23,7 @@
     "@types/node": "^9.3.0",
     "mocha": "^4.0.1",
     "moment": "^2.20.1",
-    "nappjs": "^0.5.4"
+    "nappjs": "^0.5.4",
+    "sqlite3": "^4.0.6"
   }
 }
